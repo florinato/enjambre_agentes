@@ -1,57 +1,99 @@
-# Instrucciones para configurar el entorno
+# MANIFIESTO DEL PROYECTO  
+## Arquitectura Modular de Agentes Especializados
 
-Sigue estos pasos para configurar el entorno virtual y las dependencias del proyecto:
+---
 
-## 1. Crear un entorno virtual
+## 1. Visión
 
-Abre una terminal y ejecuta el siguiente comando:
+Creemos que el futuro del desarrollo no está en automatizar tareas, sino en **colaborar con inteligencias especializadas**.  
+Donde otros sistemas conectan pasos en un flujo, nosotros conectamos **entidades pensantes**, con lógica propia y capacidad de juicio.
 
-```bash
-python -m venv venv
-```
+Creamos herramientas que no solo ejecutan, sino que **comprenden, interpretan y proponen**.
 
-## 2. Activar el entorno virtual
+---
 
-### En Windows:
+## 2. Propósito
 
-```bash
-venv\\Scripts\\activate
-```
+Este proyecto nace para construir una arquitectura abierta y extensible que permita:
 
-### En macOS y Linux:
+- Crear agentes inteligentes por dominio (literatura, bases de datos, código, diseño...).
+- Reutilizar una estructura común de ejecución, interpretación y adaptación.
+- Delegar tareas complejas a módulos autónomos, cada uno con su propio conocimiento y personalidad definida por prompts.
 
-```bash
-source venv/bin/activate
-```
+**No automatizamos. Colaboramos.**
 
-## 3. Instalar las dependencias
+---
 
-Asegúrate de estar en el directorio raíz del proyecto y ejecuta el siguiente comando:
+## 3. Principios
 
-```bash
-pip install -r requirements.txt
-```
+### Módulos como agentes
+Cada módulo es una herramienta especializada, pero con estructura de *agente*:  
+tiene propósito, lenguaje, lógica y autonomía. No son funciones. Son colaboradores.
 
-Si no existe el archivo `requirements.txt`, puedes crear uno con las dependencias necesarias:
+### Prompt como identidad
+La identidad, especialización y propósito del módulo no se define por el código,  
+sino por su *prompt*. Esto permite adaptaciones rápidas, creativas y accesibles incluso para usuarios no técnicos.
 
-```bash
-pip freeze > requirements.txt
-```
+### Separación radical de responsabilidades
+El núcleo solo orquesta, decide y delega.  
+Los módulos ejecutan, responden y proponen.  
+Esto permite una evolución constante de las herramientas sin romper el sistema.
 
-## 4. Configurar las variables de entorno
+### Extensibilidad declarativa
+Cualquier desarrollador puede aportar un módulo con tan solo tres archivos:  
+un `executor.py`, un `prompt.txt` y un `config.json`.  
+Sin necesidad de modificar el core.
 
-El proyecto utiliza variables de entorno para su configuración. El archivo `.env.example`, renómbralo a `.env`. Este archivo sirve como plantilla y contiene las variables necesarias para ejecutar el proyecto. Modifica los valores de las variables en el archivo `.env` con la configuración correcta para tu entorno. Por ejemplo:
+### Dominio como primer ciudadano
+No imponemos herramientas. Creamos entornos especializados.  
+Cada módulo puede representar un dominio completo del conocimiento:  
+literatura, seguridad, bases de datos, ética, narración, análisis, etc.
 
-```
-API_KEY=tu_api_key
-DATABASE_URL=tu_url_de_base_de_datos
-```
+---
 
-**Nota:** No incluyas información sensible (como contraseñas o claves secretas) directamente en este archivo. Asegúrate de que el archivo `.env` está incluido en el archivo `.gitignore` para evitar subir información sensible al repositorio. El archivo `.env` no debe ser subido al repositorio.
+## 4. Diferencias clave
 
-## Repositorios de ejemplo
+| Este proyecto                     | n8n / Make / Zapier                            |
+|----------------------------------|------------------------------------------------|
+| Agentes con lógica propia        | Pasos o nodos funcionales                     |
+| Pensado desde la IA              | Integración superficial de IA                 |
+| Prompt como capa de especialización | No aplicable                                 |
+| Modularidad semántica y creativa | Modularidad técnica o funcional               |
+| Colaboración y razonamiento      | Automatización de tareas                      |
+| Autohospedado y control completo | Dependencia de infraestructura cerrada        |
 
-Estos repositorios utilizan este patrón:
+---
 
-*   [agenteMongoDB](https://github.com/florinato/agenteMongoDB)
-*   [agenteLiterario](https://github.com/florinato/agenteLiterario)
+## 5. Filosofía abierta
+
+Cualquiera puede crear, adaptar o extender esta arquitectura.  
+Queremos una **comunidad de módulos especializados**,  
+una biblioteca de inteligencias prácticas,  
+y un sistema donde cada uno pueda construir su propio **ecosistema de agentes**.
+
+---
+
+## 6. Futuro
+
+Esta arquitectura es solo la base. Sobre ella pueden construirse:
+
+- Interfaces visuales tipo canvas
+- Agentes multi-herramienta conscientes del contexto
+- Sistemas narrativos, sistemas críticos, asesores técnicos
+- Supervisores autónomos
+- Entornos multiagente con colaboración simbiótica
+
+---
+
+## 7. Llamado a la acción
+
+Si te apasiona el diseño de sistemas inteligentes,  
+si quieres colaborar con IA en lugar de solo automatizarla,  
+si buscas una forma de estructurar y escalar el uso de modelos generativos...
+
+**Entonces este proyecto es también tuyo.**
+
+Construyamos un nuevo patrón. Una nueva manera de interactuar con lo artificial.  
+No flujos. No reglas. No cajas negras.
+
+**Arquitectura. Comprensión. Agencia.**
