@@ -97,3 +97,10 @@ Construyamos un nuevo patrón. Una nueva manera de interactuar con lo artificial
 No flujos. No reglas. No cajas negras.
 
 **Arquitectura. Comprensión. Agencia.**
+
+## Repositorios de ejemplo
+
+Estos repositorios utilizan este patrón:
+
+*   [agenteMongoDB](https://github.com/florinato/agenteMongoDB)
+*   [agenteLiterario](https://github.com/florinato/agenteLiterario)

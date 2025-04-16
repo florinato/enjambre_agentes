@@ -48,10 +48,3 @@ DATABASE_URL=tu_url_de_base_de_datos
 ```
 
 **Nota:** No incluyas información sensible (como contraseñas o claves secretas) directamente en este archivo. Asegúrate de que el archivo `.env` está incluido en el archivo `.gitignore` para evitar subir información sensible al repositorio. El archivo `.env` no debe ser subido al repositorio.
-
-## Repositorios de ejemplo
-
-Estos repositorios utilizan este patrón:
-
-*   [agenteMongoDB](https://github.com/florinato/agenteMongoDB)
-*   [agenteLiterario](https://github.com/florinato/agenteLiterario)
