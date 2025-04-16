@@ -1,0 +1,5 @@
+Formato para una consulta del usuario: consulta usuario: {message}
+Formato para la respuesta al usuario: respuesta usuario: {message}
+Formato para la consulta al sistema (ej: mongo): consulta mongo: {command}
+Formato para la respuesta del sistema (ej: mongo): respuesta mongo: {output}
+Patrón para parsear mensajes: (consulta mongo|respuesta usuario):\s*(.*)

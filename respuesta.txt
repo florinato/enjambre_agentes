@@ -1,0 +1,13 @@
+Si, la plantilla actual proporciona una buena base para planificar un agente de automatización SEO. La estructura modular, con archivos como `agente.py`, `executor.py`, `model_integration.py` y `communication.py`, permite implementar las diferentes funcionalidades necesarias para SEO, como la investigación de palabras clave, la optimización de contenido, la construcción de enlaces y el SEO técnico.  Se pueden adaptar los prompts y la lógica de ejecución para tareas específicas de SEO. Sin embargo, sería necesario agregar módulos específicos para la gestión de datos SEO (por ejemplo, integración con APIs de herramientas SEO) y la monitorización de resultados.
+
+Además, la plantilla se alinea bien con el manifiesto del proyecto, que enfatiza una arquitectura modular con agentes especializados, identidad basada en prompts, separación de responsabilidades y extensibilidad declarativa. La estructura actual permite crear módulos SEO que se adhieren a estos principios.
+
+Para facilitar la edición y personalización de la plantilla, es importante comprender el propósito de cada archivo:
+
+*   `agente.py`: Contiene la lógica principal del agente, incluyendo la orquestación de tareas y la toma de decisiones.
+*   `executor.py`: Define cómo se ejecutan las diferentes acciones o tareas del agente.
+*   `model_integration.py`: Se encarga de la integración con modelos de lenguaje (como GPT-3) para generar contenido, analizar datos, etc.
+*   `communication.py`: Gestiona la comunicación del agente con el exterior, ya sea con usuarios, APIs o bases de datos.
+*   `prompts/`: Este directorio contiene los prompts que definen la identidad y el comportamiento de los diferentes módulos del agente.
+
+Al modificar estos archivos y prompts, se puede adaptar la plantilla para automatizar tareas específicas de SEO.

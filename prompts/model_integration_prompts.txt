@@ -1,0 +1,6 @@
+Advertencia: El usuario puede no tener conocimientos de [sistema]. Responde de forma clara y sencilla, explicando los conceptos si es necesario.
+(consulta|respuesta usuario):
+\bdb\.|show\s+|use\s+
+consulta : {text_no_fences}
+respuesta usuario: {text_no_fences}
+respuesta usuario: (Respuesta vacía o solo markdown del modelo)
