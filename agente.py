@@ -18,13 +18,17 @@ with open(PROMPT_FILE, "r") as f:
 # Adaptar la inicialización del LLM si es necesario
 llm = GeminiLLM()
 
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+
+
 def main():
     # Inicializar LLM, Memoria y Cadena de Conversación
     llm = GeminiLLM()
     memory = ConversationBufferMemory(memory_key="history", human_prefix="consulta usuario", ai_prefix="respuesta modelo") # Usar prefijos personalizados si es necesario
     conversation = ConversationChain(
         llm=llm,
-        prompt=PROMPT,
+        prompt=TEMPLATE,
         verbose=False, # Poner a True para ver el prompt completo enviado a Langchain
         memory=memory
     )

@@ -53,11 +53,11 @@ literatura, seguridad, bases de datos, ética, narración, análisis, etc.
 
 ## 4. Diferencias clave
 
-| Este proyecto                     | n8n / Make / Zapier                            |
-|----------------------------------|------------------------------------------------|
+| Este proyecto                    | n8n / Make / Zapier                          |
+|----------------------------------|-----------------------------------------------|
 | Agentes con lógica propia        | Pasos o nodos funcionales                     |
 | Pensado desde la IA              | Integración superficial de IA                 |
-| Prompt como capa de especialización | No aplicable                                 |
+| Prompt como capa de especialización | No aplicable                               |
 | Modularidad semántica y creativa | Modularidad técnica o funcional               |
 | Colaboración y razonamiento      | Automatización de tareas                      |
 | Autohospedado y control completo | Dependencia de infraestructura cerrada        |

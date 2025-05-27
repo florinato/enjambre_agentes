@@ -1,0 +1,76 @@
+superagente_quintana/
+│
+├── main.py                            # Punto de entrada principal.
+│                                      # Orquesta el flujo general:
+│                                      # 1. Recibe la tarea inicial del usuario.
+│                                      # 2. Pasa la tarea al Orquestador Master.
+│                                      # 3. Procesa las instrucciones de delegación del Master.
+│                                      # 4. Lanza y gestiona los agentes del enjambre (usando GestorEnjambre).
+│                                      # 5. Recolecta resultados y los presenta al usuario o al Master.
+│                                      # 6. Inicializa el Gestor de Logs (conexión a la BD SQLite).
+│
+├── agentes/
+│   ├── __init__.py
+│   ├── clase_agente.py                # Clase base para un agente individual (Agente del Enjambre).
+│                                      # - Mantiene el estado del agente (nombre, rol, objetivo).
+│                                      # - **Guarda y gestiona SU PROPIO contexto/historial de conversación.**
+│                                      # - Tiene una referencia al LLM y a las herramientas disponibles.
+│                                      # - Métodos para actualizar su contexto y interactuar (mediado por BucleLogicoAgente).
+│   └── cargar_desde_json.py          # Función auxiliar para cargar configs base de agentes (opcional).
+│
+├── servicios/
+│   ├── __init__.py
+│   ├── cargar_llm.py                 # Centraliza la carga y configuración de la instancia del LLM (Gemini).
+│                                      # Usado por el Orquestador Master y el Bucle Logico Agente.
+│   ├── ejecutor_consola.py           # **Servicio para ejecutar comandos en la consola del contenedor.**
+│                                      # - Recibe la solicitud estructurada de un agente (comando).
+│                                      # - Ejecuta el comando usando subprocess (con la seguridad básica/sanitización necesaria para el experimento).
+│                                      # - Captura stdout, stderr, return code.
+│                                      # - Formatea el resultado para devolverlo al agente.
+│   ├── gestor_logs.py                # **Servicio centralizado para interactuar con la base de datos SQLite.**
+│                                      # - Contiene la lógica de conexión al archivo de la BD (swarm.db).
+│                                      # - Define y crea las tablas (logs, estados de agente/tarea) dentro de esa BD.
+│                                      # - Proporciona métodos para registrar toda la actividad del sistema del enjambre:
+│                                      #   - Interacciones del Master y delegaciones.
+│                                      #   - Contexto inicial de cada agente.
+│                                      #   - Cada turno de conversación (input/output del LLM) por agente.
+│                                      #   - Cada llamada a herramienta y su resultado por agente.
+│                                      #   - Estados de la tarea/agente.
+│   ├── orquestador_master.py         # **Implementa la lógica del Agente Master.**
+│                                      # - Interactúa con el LLM (usando cargar_llm y prompts del master).
+│                                      # - Recibe la tarea de main.py.
+│                                      # - Descompone la tarea.
+│                                      # - Genera las solicitudes de delegación estructuradas (<delegate_task>).
+│                                      # - Usa gestor_logs.py para registrar sus acciones de planificación y delegación.
+│                                      # - Podría sintetizar resultados de agentes del enjambre.
+│   ├── gestor_enjambre.py            # **Gestiona el ciclo de vida y ejecución de los agentes del enjambre.**
+│                                      # - Recibe solicitudes de delegación del Orquestador Master (vía main.py).
+│                                      # - Crea instancias de `Agente`.
+│                                      # - Lanza el `BucleLogicoAgente` para cada uno.
+│                                      # - Podría gestionar comunicación o resultados.
+│   └── bucle_logico_agente.py        # **El bucle de ejecución principal para UN agente del enjambre.**
+│                                      # - Recibe una instancia de `Agente` y su tarea inicial.
+│                                      # - Implementa el ciclo (construir prompt -> llamar LLM -> parsear -> usar herramienta -> etc.).
+│                                      # - Usa gestor_logs.py para registrar cada paso del proceso del agente.
+│                                      # - Aplica el Model Context Protocol para construir la entrada del LLM en cada iteración.
+│
+├── prompts/                          # Directorio para almacenar templates de prompts.
+│   ├── __init__.py
+│   ├── master_agent_prompt.txt       # Template para el prompt del Agente Master.
+│   ├── swarm_agent_base_instruction.txt # Template base para la instrucción inicial de los agentes del enjambre.
+│   └── tool_definitions.py (o .json) # Definiciones de herramientas para el LLM (para LangChain/Gemini Tools).
+│
+├── data/                             # Directorio para datos persistentes (volumen mapeado en Docker).
+│   └── swarm.db                      # **Archivo que contiene la base de datos SQLite para el sistema del enjambre.**
+│
+├── agentes_json/                     # (Opcional) JSONs predefinidos para agentes.
+│   └── ejemplo_agente.json
+│
+├── docker/                           # Archivos relacionados con el contenedor Docker.
+│   ├── Dockerfile                    # Define el entorno del contenedor.
+│   └── requirements.txt              # Dependencias para el contenedor (incluir `sqlite3` si no está built-in en la imagen base).
+│                                      # Asegurarse de que el Dockerfile cree el directorio /app/data/db y asigne permisos.
+│
+├── .env                              # Variables de entorno (API keys, nombre del modelo LLM).
+├── requirements.txt                  # Dependencias del proyecto principal (incluir `sqlite3` si no está built-in).
+└── README.md                         # Descripción del proyecto, cómo configurar y ejecutar, cómo ver los logs.                       # Descripción del proyecto y cómo ejecutarlo
