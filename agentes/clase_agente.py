@@ -1,38 +1,37 @@
 from typing import List
 
-from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
-from langchain.schema import AIMessage, HumanMessage, SystemMessage
+# Ensure necessary BaseMessage and specific message types are imported
+# Prefer imports from langchain_core.messages
 from langchain_core.messages import (AIMessage, BaseMessage, HumanMessage,
                                      SystemMessage)
-from langchain_google_genai import ChatGoogleGenerativeAI
 
 from servicios.cargar_llm import cargar_llm
 
+# Remove ChatGoogleGenerativeAI if not directly used here, but cargar_llm uses it.
+# from langchain_google_genai import ChatGoogleGenerativeAI
+
+
 
 class Agente:
-    def __init__(self, nombre: str, rol: str, objetivo: str, historial_conversacion: List = [], tokens_utilizados: int = 0):
+    def __init__(self, nombre: str, rol: str, objetivo: str, historial_conversacion: List[BaseMessage] = None, tokens_utilizados: int = 0):
         self.nombre = nombre
         self.rol = rol
         self.objetivo = objetivo
-        self.historial_conversacion = historial_conversacion
+        # Initialize history as an empty list if None is passed
+        self.historial_conversacion: List[BaseMessage] = [] if historial_conversacion is None else historial_conversacion
         self.tokens_utilizados = tokens_utilizados
         self.modelo = cargar_llm()  # Obtener el LLM del servicio
-        self.memory = ConversationBufferMemory(memory_key="history", human_prefix="consulta usuario", ai_prefix="respuesta modelo")
-        self.conversation = ConversationChain(
-            llm=self.modelo,
-            memory=self.memory,
-            verbose=False,
-        )
 
-    def add_message_to_history(self, message):
+    def add_message_to_history(self, message: BaseMessage):
         """Añade un mensaje al historial de la conversación."""
         self.historial_conversacion.append(message)
-        if isinstance(message, HumanMessage):
-            self.memory.save_context({"input": message.content}, {"output": ""}) # Guardar el input en la memoria
-        elif isinstance(message, AIMessage):
-            self.memory.save_context({"input": ""}, {"output": message.content}) # Guardar el output en la memoria
 
-    def get_history(self):
+    def get_history(self) -> List[BaseMessage]:
         """Obtiene el historial de la conversación."""
         return self.historial_conversacion
+    def clear_history(self):
+        """Limpia el historial de la conversación."""
+        self.historial_conversacion = []
+    def get_tokens_utilizados(self) -> int:
+        """Obtiene el número de tokens utilizados."""
+        return self.tokens_utilizados

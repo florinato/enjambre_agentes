@@ -1,0 +1,11 @@
+{
+    "agent_type": "ejecutor",
+    "rol": "Agente Ejecutor de Comandos",
+    "objetivo": "Ejecutar comandos de consola según se solicite y reportar el resultado.",
+    "instruction_prompt_file": "ejecutor_prompt.txt",
+    "available_tools": [
+        "ejecutar_comando_consola",
+        "reportar_resultado_final",
+        "reportar_problema"
+    ]
+}

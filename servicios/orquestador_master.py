@@ -29,6 +29,8 @@ class OrquestadorMaster:
         self.gestor_enjambre_svc = gestor_enjambre # Referencia al gestor para enviar mensajes via main.py
 
         # Cargar LLM del Master
+        print(f"Tipo de cargar_llm_svc: {type(cargar_llm_svc)}")
+        print(f"Valor de cargar_llm_svc: {cargar_llm_svc}")
         self.modelo = cargar_llm_svc() # O get_shared_llm_instance()
         if not self.modelo:
              self.gestor_logs.log_event("master_init", "master", "Error: No se pudo cargar el LLM para el Master.", log_level="FATAL")
@@ -111,6 +113,7 @@ class OrquestadorMaster:
 
             # Añadir la respuesta del LLM al historial del Master
             self.add_message_to_history(response_obj)
+            self.gestor_logs.log_event("master_response", "master", f"Respuesta del Master: {response_obj.content}", log_level="INFO")
 
         except Exception as e:
             self.gestor_logs.log_event("master_error", "master", f"Error durante llamada al LLM Master: {e}", log_level="ERROR")
@@ -120,6 +123,7 @@ class OrquestadorMaster:
 
         # --- Procesar Respuesta del LLM del Master (Buscar Acciones Solicitadas) ---
         actions_requested: List[Dict[str, Any]] = [] # Puede contener delegar o enviar mensaje
+        respuesta_texto = ""
 
         if response_obj:
              try:
@@ -184,6 +188,7 @@ class OrquestadorMaster:
                  # Si no hay tool_calls, la respuesta es texto normal
                  if not tool_calls and response_obj.content:
                       self.gestor_logs.log_event("master_response_text", "master", f"Respuesta de texto del Master: {response_obj.content[:200]}...", log_level="INFO")
+                      respuesta_texto = response_obj.content
                       # Aquí podrías tener lógica para interactuar con el usuario o marcar que Master ha terminado su fase de planning/respuesta
 
 
@@ -191,5 +196,4 @@ class OrquestadorMaster:
                  self.gestor_logs.log_event("master_error", "master", f"Error al procesar la respuesta del LLM Master o parsear tool_calls: {e}", log_level="ERROR")
                  print(f"Error al procesar la respuesta del LLM Master o parsear tool_calls: {e}")
 
-
-        return actions_requested # Retorna la lista de acciones a ser ejecutadas por main.py
+        return actions_requested, respuesta_texto # Retorna la lista de acciones a ser ejecutadas por main.py y el texto de respuesta

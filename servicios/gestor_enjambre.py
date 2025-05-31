@@ -5,9 +5,11 @@ import threading
 import time  # Para ID simple
 from typing import Any, Dict, List, Optional
 
+from langchain_core.messages import SystemMessage
+
 # Importar SystemMessage para notificaciones al Master
 # Importar las clases necesarias
-from agentes.clase_agente import Agente, SystemMessage
+from agentes.clase_agente import Agente
 
 # from servicios.bucle_logico_agente import AgenteExecutionLoop
 
